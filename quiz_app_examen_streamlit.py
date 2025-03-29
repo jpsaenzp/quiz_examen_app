@@ -86,7 +86,7 @@ def merge_dicts(dict_list):
     return functools.reduce(lambda d1, d2: {**d1, **d2}, dict_list)
 sheets_dict2 = sheets_dict2.groupby('nivel', as_index=False).agg({'diccionarios': lambda x: merge_dicts(x)})
 sheets_dict2 = {row['nivel']: row["diccionarios"] for _, row in sheets_dict2.iterrows()}
-sheets_dict2 = dict(itertools.islice(sheets_dict2.items(), 1)) #seleccionar las secciones
+#sheets_dict2 = dict(itertools.islice(sheets_dict2.items(), 1)) #seleccionar las secciones
 
 def enviar_resultados_por_correo():
     """Genera un archivo Excel con los resultados y lo envía al correo del profesor."""
@@ -169,11 +169,11 @@ if st.session_state.quiz_finalizado:
     if st.button("Enviar Resultados al Profesor"):
         enviar_resultados_por_correo()
 
-    # Botón de descarga de resultados
-    if st.button("Descargar Resultados"):
-        df = pd.DataFrame(st.session_state.respuestas)
-        df.to_excel("resultados_quiz.xlsx", index=False)
-        st.success("Resultados guardados como 'resultados_quiz.xlsx'")
+    # # Botón de descarga de resultados
+    # if st.button("Descargar Resultados"):
+    #     df = pd.DataFrame(st.session_state.respuestas)
+    #     df.to_excel("resultados_quiz.xlsx", index=False)
+    #     st.success("Resultados guardados como 'resultados_quiz.xlsx'")
     # Mostrar puntajes
     for seccion, puntaje in st.session_state.puntajes.items():
         st.write(f"**{seccion}:** {puntaje}/5 - Puntaje: {puntaje / 5:.2f}")
@@ -210,11 +210,11 @@ if st.session_state.quiz_finalizado2:
     if st.button("Enviar Resultados al Profesor"):
         enviar_resultados_por_correo()
     
-    # Botón de descarga de resultados
-    if st.button("Descargar Resultados"):
-        df = pd.DataFrame(st.session_state.respuestas)
-        df.to_excel("resultados_quiz.xlsx", index=False)
-        st.success("Resultados guardados como 'resultados_quiz.xlsx'")
+    # # Botón de descarga de resultados
+    # if st.button("Descargar Resultados"):
+    #     df = pd.DataFrame(st.session_state.respuestas)
+    #     df.to_excel("resultados_quiz.xlsx", index=False)
+    #     st.success("Resultados guardados como 'resultados_quiz.xlsx'")
     st.stop()
 
 if respuesta_seleccionada:
